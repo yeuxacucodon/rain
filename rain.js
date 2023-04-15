@@ -15,29 +15,29 @@ class Rain {
 	}
 
 	draw() {
-		canvasContext.rotate(-this.direction);
-		canvasContext.fillStyle = this.color;
-		canvasContext.fillRect(this.posX, this.posY, this.width, this.height);
-		canvasContext.rotate(+this.direction);
+		ctx.rotate(-this.direction);
+		ctx.fillStyle = this.color;
+		ctx.fillRect(this.posX, this.posY, this.width, this.height);
+		ctx.rotate(+this.direction);
 	}
 }
 
 const canvas = document.getElementById("canvas");
-const canvasContext = canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 let cw = window.innerWidth;
 let ch = window.innerHeight;
 canvas.width = cw;
 canvas.height = ch;
 
 createRect = (x, y, width, height, color) => {
-	canvasContext.fillStyle = color;
-	canvasContext.fillRect(x, y, width, height);
+	ctx.fillStyle = color;
+	ctx.fillRect(x, y, width, height);
 };
 
 const allRains = [];
-let RainWidth = 2;
-let RainHeight = 15;
-let maximumRainCount = 500;
+const RainWidth = 2;
+const RainHeight = 15;
+const maximumRainCount = 500;
 const maximumRainInitializationInOneFrame = 5;
 const fps = 60;
 const color = "#F40FFF";
@@ -47,9 +47,9 @@ show = () => {
 	draw();
 };
 
-let speedMultiplier = 10;
+const speedMultiplier = 10;
 update = () => {
-	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	let rainInitCountInThisFrame = 0;
 	while (
 		allRains.length < maximumRainCount &&
