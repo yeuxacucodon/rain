@@ -29,11 +29,6 @@ let ch = window.innerHeight;
 canvas.width = cw;
 canvas.height = ch;
 
-createRect = (x, y, width, height, color) => {
-	ctx.fillStyle = color;
-	ctx.fillRect(x, y, width, height);
-};
-
 const allRains = [];
 const RainWidth = 2;
 const RainHeight = 15;
