@@ -46,10 +46,8 @@ const speedMultiplier = 10;
 update = () => {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	let rainInitCountInThisFrame = 0;
-	while (
-		allRains.length < maximumRainCount &&
-		maximumRainInitializationInOneFrame > rainInitCountInThisFrame
-	) {
+	// rome-ignore format: easier to read
+	while (allRains.length < maximumRainCount && maximumRainInitializationInOneFrame > rainInitCountInThisFrame) {
 		const distanceFromCam = Math.random();
 		// rome-ignore format: easier to read
 		const c = `rgba(${parseInt(color.substring(1, 3), 16)},${parseInt(color.substring(3, 5),16)},${parseInt(color.substring(5, 7), 16)},${1 - distanceFromCam})`;
