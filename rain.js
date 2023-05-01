@@ -35,7 +35,6 @@ const RainHeight = 15;
 const maximumRainCount = 500;
 const maximumRainInitializationInOneFrame = 5;
 const fps = 60;
-const color = "#F40FFF";
 
 show = () => {
 	update();
@@ -50,7 +49,7 @@ update = () => {
 	while (allRains.length < maximumRainCount && maximumRainInitializationInOneFrame > rainInitCountInThisFrame) {
 		const distanceFromCam = Math.random();
 		// rome-ignore format: easier to read
-		const c = `rgba(${parseInt(color.substring(1, 3), 16)},${parseInt(color.substring(3, 5),16)},${parseInt(color.substring(5, 7), 16)},${1 - distanceFromCam})`;
+		const c = `rgba(26, 118, 182, ${1 - distanceFromCam})`;
 		const rain = new Rain(
 			RainWidth * (2 - distanceFromCam),
 			RainHeight * (2 - distanceFromCam),
