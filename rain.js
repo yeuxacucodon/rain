@@ -49,7 +49,7 @@ update = () => {
 	while (allRains.length < maximumRainCount && maximumRainInitializationInOneFrame > rainInitCountInThisFrame) {
 		const distanceFromCam = Math.random();
 		// rome-ignore format: easier to read
-		const c = `rgba(26, 118, 182, ${1 - distanceFromCam})`;
+		const color = `rgba(26, 118, 182, ${1 - distanceFromCam})`;
 		const rain = new Rain(
 			RainWidth * (2 - distanceFromCam),
 			RainHeight * (2 - distanceFromCam),
@@ -57,7 +57,7 @@ update = () => {
 			Math.random() * canvas.width,
 			-100,
 			((2 - distanceFromCam) * 5 * speedMultiplier) / 10,
-			c,
+			color,
 		);
 		allRains.push(rain);
 		++rainInitCountInThisFrame;
