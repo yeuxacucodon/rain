@@ -32,7 +32,7 @@ class Rain {
 		ctx.rotate(-this.direction);
 		ctx.fillStyle = this.color;
 		ctx.fillRect(this.posX, this.posY, this.width, this.height);
-		ctx.rotate(+this.direction);
+		ctx.rotate(this.direction);
 	}
 }
 
@@ -70,10 +70,10 @@ update = () => {
 		++rainCountInThisFrame;
 	}
 
-	allRains.forEach((i) => {
-		i.move();
-		if (i.posX > canvas.width || i.posY > canvas.height) {
-			allRains.splice(allRains.indexOf(i), 1);
+	allRains.forEach((rain) => {
+		rain.move();
+		if (rain.posX > canvas.width || rain.posY > canvas.height) {
+			allRains.splice(allRains.indexOf(rain), 1);
 		}
 	});
 };
@@ -81,9 +81,7 @@ update = () => {
 window.onload = show = () => {
 	requestAnimationFrame(show);
 	update();
-	(function draw() {
-		allRains.forEach((i) => {
-			i.draw();
-		});
-	})();
+	allRains.forEach((rain) => {
+		rain.draw();
+	});
 };
