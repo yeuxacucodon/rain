@@ -52,7 +52,7 @@ function randomColors() {
 	return color;
 }
 
-update = () => {
+function update() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	let rainCountInThisFrame = 0;
 	// rome-ignore format: easier to read
@@ -64,7 +64,7 @@ update = () => {
 			Math.random() * canvas.width,
 			0,
 			((2 - Math.random()) * 5 * speed) / 10,
-      randomColors(),
+			randomColors(),
 		);
 		allRains.push(rain);
 		++rainCountInThisFrame;
@@ -76,9 +76,9 @@ update = () => {
 			allRains.splice(allRains.indexOf(rain), 1);
 		}
 	});
-};
+}
 
-window.onload = show = () => {
+window.onload = function show() {
 	requestAnimationFrame(show);
 	update();
 	allRains.forEach((rain) => {
