@@ -1,3 +1,17 @@
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let cw = window.innerWidth;
+let ch = window.innerHeight;
+canvas.width = cw;
+canvas.height = ch;
+
+window.addEventListener("resize", () => {
+	cw = window.innerWidth;
+	ch = window.innerHeight;
+	canvas.width = cw;
+	canvas.height = ch;
+});
+
 class Rain {
 	constructor(width, height, direction, posX, posY, speed, color) {
 		this.width = width;
@@ -22,19 +36,12 @@ class Rain {
 	}
 }
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let cw = window.innerWidth;
-let ch = window.innerHeight;
-canvas.width = cw;
-canvas.height = ch;
-
 const allRains = [];
 const RainWidth = 2;
 const RainHeight = 15;
-const maximumRainCount = 500;
-const maximumRainInitializationInOneFrame = 5;
-const fps = 60;
+const maxRainCount = 500;
+const maxRainInOneFrame = 5;
+const speed = 10;
 
 function randomColors() {
 	const r = Math.floor(Math.random() * 255);
@@ -45,52 +52,38 @@ function randomColors() {
 	return color;
 }
 
-show = () => {
-	update();
-	draw();
-};
-
-const speedMultiplier = 10;
 update = () => {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	let rainInitCountInThisFrame = 0;
+	let rainCountInThisFrame = 0;
 	// rome-ignore format: easier to read
-	while (allRains.length < maximumRainCount && maximumRainInitializationInOneFrame > rainInitCountInThisFrame) {
-		const distanceFromCam = Math.random();
-		// rome-ignore format: easier to read
-    const color = randomColors();
+	while (allRains.length < maxRainCount && rainCountInThisFrame < maxRainInOneFrame) {
 		const rain = new Rain(
-			RainWidth * (2 - distanceFromCam),
-			RainHeight * (2 - distanceFromCam),
-			Math.random() / 20,
+			RainWidth * (2 - Math.random()),
+			RainHeight * (2 - Math.random()),
+			Math.random() / 10,
 			Math.random() * canvas.width,
-			-100,
-			((2 - distanceFromCam) * 5 * speedMultiplier) / 10,
-			color,
+			0,
+			((2 - Math.random()) * 5 * speed) / 10,
+      randomColors(),
 		);
 		allRains.push(rain);
-		++rainInitCountInThisFrame;
+		++rainCountInThisFrame;
 	}
 
-	for (let i = 0; i < allRains.length; ++i) {
-		allRains[i].move();
-		if (allRains[i].posY > canvas.height || allRains[i].posX > canvas.width) {
-			allRains.splice(i, 1);
+	allRains.forEach((i) => {
+		i.move();
+		if (i.posX > canvas.width || i.posY > canvas.height) {
+			allRains.splice(allRains.indexOf(i), 1);
 		}
-	}
-};
-
-draw = () => {
-	allRains.forEach((rain) => {
-		rain.draw();
 	});
 };
 
-window.addEventListener("resize", () => {
-	cw = window.innerWidth;
-	ch = window.innerHeight;
-	canvas.width = cw;
-	canvas.height = ch;
-});
-
-setInterval(show, 1000 / fps);
+window.onload = show = () => {
+	requestAnimationFrame(show);
+	update();
+	(function draw() {
+		allRains.forEach((i) => {
+			i.draw();
+		});
+	})();
+};
