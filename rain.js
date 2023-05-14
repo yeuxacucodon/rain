@@ -44,9 +44,9 @@ const maxRainInOneFrame = 5;
 const speed = 10;
 
 function randomColors() {
-	const r = Math.floor(Math.random() * 255);
-	const g = Math.floor(Math.random() * 255);
-	const b = Math.floor(Math.random() * 255);
+	const r = Math.floor(Math.random() * 256);
+	const g = Math.floor(Math.random() * 256);
+	const b = Math.floor(Math.random() * 256);
 	const a = 1 - Math.random();
 	const color = `rgba(${r}, ${g}, ${b}, ${a})`;
 	return color;
