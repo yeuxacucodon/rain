@@ -70,10 +70,10 @@ function update() {
 		++rainCountInThisFrame;
 	}
 
-	allRains.forEach((rain) => {
-		rain.move();
-		if (rain.posX > canvas.width || rain.posY > canvas.height) {
-			allRains.splice(allRains.indexOf(rain), 1);
+	allRains.forEach((element, index) => {
+		element.move();
+		if (element.posX > canvas.width || element.posY > canvas.height) {
+			allRains.splice(index, 1);
 		}
 	});
 }
